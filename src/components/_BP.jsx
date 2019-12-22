@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import PT from 'proptypes';
+// import PT from 'proptypes';
 
 const propTypes = {};
 const defaultProps = {};
