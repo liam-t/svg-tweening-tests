@@ -1,10 +1,13 @@
 import React from 'react';
 import Btn from './components/Btn';
+import Container from './components/Container';
 
 function App() {
   return (
     <div className="App">
-      <Btn />
+      <Container>
+        <Btn />
+      </Container>
     </div>
   );
 }
