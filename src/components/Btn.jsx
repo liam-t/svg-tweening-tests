@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import posed from 'react-pose';
 import { tween } from 'popmotion';
 import {
-  // interpolate,
   separate,
   combine,
 } from 'flubber';
@@ -46,21 +45,31 @@ const transition = ({ from, to }) => {
   return tween({
     from: 0,
     to: 1,
-    duration: 600,
+    duration: 1000,
   }).pipe(interpolator);
 };
 
 
 const Btn = () => {
   const [isActive, setIsActive] = React.useState(false);
+  const [isAnimating, setIsAnimating] = React.useState(false);
   const activePose = isActive ? 'playing' : 'paused';
   const activeColor = isActive ? '#327772' : '#242c56';
-  const clickHandle = () => setIsActive(!isActive);
+  const clickHandle = () => {
+    if (isAnimating) return;
+    setIsAnimating(true);
+    setIsActive(!isActive);
+  };
+  const completeHandle = () => setIsAnimating(false);
 
   return (
-    <BtnOuter type="button">
+    <BtnOuter type="button" disabled={isAnimating}>
       <Svg onClick={clickHandle}>
-        <Icon pose={activePose} fill={activeColor} />
+        <Icon
+          pose={activePose}
+          fill={activeColor}
+          onPoseComplete={completeHandle}
+        />
       </Svg>
     </BtnOuter>
   );
@@ -70,9 +79,14 @@ Btn.defaultProps = defaultProps;
 export default Btn;
 
 const BtnOuter = styled.button`
+  padding: 0;
   background-color: transparent;
   outline: none;
   border: none;
+  cursor: pointer;
+  &[disabled] {
+    cursor: default;
+  }
 `;
 const Svg = styled.svg`
   width: 100px;
