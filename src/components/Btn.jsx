@@ -5,6 +5,7 @@ import { tween } from 'popmotion';
 import {
   separate,
   combine,
+  splitPathString,
 } from 'flubber';
 // import PT from 'proptypes';
 
@@ -23,12 +24,8 @@ const pausedPath = pausedPathElements.join(' ');
 const transition = ({ from, to }) => {
   const parsedValFromTo = (fromTo) => {
     if (typeof fromTo !== 'string') fromTo.join(' ');
-    const splitOnZ = fromTo.split('z');
-    if (splitOnZ.length > 2) {
-      return splitOnZ
-        .filter((item) => item)
-        .map((item) => `${item.trim()} z`);
-    }
+    const pathToArray = splitPathString(fromTo);
+    if (pathToArray.length > 1) return pathToArray;
     return fromTo;
   };
   const parsedFrom = parsedValFromTo(from);
@@ -45,7 +42,7 @@ const transition = ({ from, to }) => {
   return tween({
     from: 0,
     to: 1,
-    duration: 1000,
+    duration: 300,
   }).pipe(interpolator);
 };
 
