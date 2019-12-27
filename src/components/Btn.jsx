@@ -39,9 +39,9 @@ const transition = ({ from, to }) => {
     single: true,
   };
   const args = [parsedFrom, parsedTo, transitionOptions];
-  const interpolator = parsedTo.length > 0
-    ? separate(...args)
-    : combine(...args);
+  const interpolator = typeof parsedTo === 'string'
+    ? combine(...args)
+    : separate(...args);
 
   return tween({
     from: 0,
@@ -52,7 +52,7 @@ const transition = ({ from, to }) => {
 
 
 const Btn = () => {
-  const [isActive, setIsActive] = React.useState(true);
+  const [isActive, setIsActive] = React.useState(false);
   const activePose = isActive ? 'playing' : 'paused';
   const activeColor = isActive ? '#327772' : '#242c56';
   const clickHandle = () => setIsActive(!isActive);
