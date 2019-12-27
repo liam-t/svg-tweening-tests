@@ -51,7 +51,7 @@ const transition = ({ from, to }) => {
 const Btn = () => {
   const [isActive, setIsActive] = React.useState(false);
   const [isAnimating, setIsAnimating] = React.useState(false);
-  const activePose = isActive ? 'playing' : 'paused';
+  const activePose = isActive ? 'paused' : 'playing';
   const activeColor = isActive ? '#327772' : '#242c56';
   const clickHandle = () => {
     if (isAnimating) return;
