@@ -1,7 +1,7 @@
 import React from 'react';
 import styled, { css, keyframes } from 'styled-components';
 import posed from 'react-pose';
-import { tween } from 'popmotion';
+import { tween, easing } from 'popmotion';
 import {
   separate,
   combine,
@@ -44,6 +44,7 @@ const transition = ({ from, to }) => {
     from: 0,
     to: 1,
     duration: transitionDuration,
+    ease: easing.backInOut,
   }).pipe(interpolator);
 };
 
